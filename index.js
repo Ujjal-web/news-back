@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
@@ -11,7 +10,6 @@ app.use(cors());
 // ===== MongoDB connection =====
 mongoose
     .connect(process.env.MONGO_URI, {
-        // optional: pass options based on your driver version
     })
     .then(() => console.log('MongoDB connected'))
     .catch((err) => console.error('MongoDB connection error:', err));
@@ -85,7 +83,7 @@ app.get('/news/:country', async (req, res) => {
             if (sources) {
                 delete topParams.country;
                 delete topParams.category;
-                topParams.sources = sources; // comma-separated source IDs
+                topParams.sources = sources;
             }
 
             const response = await axios.get(
@@ -115,7 +113,7 @@ app.get('/news/:country', async (req, res) => {
             }
 
             if (language) everythingParams.language = language;
-            if (from) everythingParams.from = from; // YYYY-MM-DD is fine
+            if (from) everythingParams.from = from;
             if (to) everythingParams.to = to;
             if (sources) everythingParams.sources = sources;
 
